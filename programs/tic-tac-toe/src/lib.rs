@@ -9,10 +9,22 @@ declare_id!("2VoQBkLfKDU3S7iqfo1Ub7NqBinC3fFBL8CDLqcvXz2J");
 pub mod tic_tac_toe {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        Ok(())
+    pub fn setup_game(ctx: Context<SetupGame>, player_two: Pubkey) -> Result<()> {
+        ctx.accounts.game.start([ctx.accounts.player_one.key(), player_two])
     }
+}
+
+#[derive(Accounts)]
+pub struct SetupGame<'info> {
+    #[account(
+        init, 
+        payer = player_one, 
+        space = 8 + Game::MAXIMUM_SIZE)
+        ]
+    pub game: Account<'info, Game>,
+    #[account(mut)]
+    pub player_one: Signer<'info>,
+    pub system_program: Program<'info, System>,
 }
 
 impl Game {
@@ -115,9 +127,6 @@ impl Game {
         self.state = GameState::Tie;
     }
 }
-
-#[derive(Accounts)]
-pub struct Initialize {}
 
 #[error_code]
 pub enum TicTacToeError {

@@ -22,7 +22,7 @@ pub mod tic_tac_toe {
             TicTacToeError::NotPlayersTurn,
         );
 
-        game.play(&tile);
+        game.play(&tile)
     }
 }
 

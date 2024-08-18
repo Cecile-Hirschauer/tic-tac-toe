@@ -5,13 +5,13 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-tic_tac_toe = "2VoQBkLfKDU3S7iqfo1Ub7NqBinC3fFBL8CDLqcvXz2J"
+tic_tac_toe = "GCKtWv1LoV25cvabAGULqGk5e1aZpFDEZhbEX5JqdovU"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "Devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
